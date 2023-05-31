@@ -1,0 +1,21 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - responder1
+      - responder2
+
+  responder1:
+    build: ./responder1
+    ports:
+      - 3001:3000
+
+  responder2:
+    build: ./responder2
+    ports:
+      - 3002:3000

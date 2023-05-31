@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket Test Client</title>
+  <script>
+    function connectToResponder(responderPath) {
+      const socketUrl = `ws://localhost${responderPath}`;
+      const socket = new WebSocket(socketUrl);
+
+      socket.onopen = () => {
+        console.log('WebSocket connection established');
+      };
+
+      socket.onmessage = (event) => {
+        const message = event.data;
+        console.log(`Received message: ${message}`);
+      };
+
+      socket.onerror = (error) => {
+        console.error('WebSocket error:', error);
+      };
+
+      socket.onclose = () => {
+        console.log('WebSocket connection closed');
+      };
+    }
+  </script>
+</head>
+<body>
+  <button onclick="connectToResponder('/responder1')">Connect to Responder 1</button>
+  <button onclick="connectToResponder('/responder2')">Connect to Responder 2</button>
+</body>
+</html>
